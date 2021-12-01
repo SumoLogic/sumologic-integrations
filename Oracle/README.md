@@ -7,9 +7,9 @@ CREATE USER sumo_user IDENTIFIED BY "<yourpassword>";
 GRANT select_catalog_role TO sumo_user;
 GRANT CREATE SESSION TO sumo_user;
 ```
-If you get error ```ORA-65096: invalid common user or role name``` when creating sumo_user
+If you get error ```ORA-65096: invalid common user or role name``` when creating ```sumo_user```
 
-You set the undocumented (hidden) parameter "_oracle_script"=true  you can create the fred user without a C## in from of the user ID.  However, this user will not used useful in a pluggable/container database:
+You set the undocumented (hidden) parameter ```"_oracle_script"=true```  you can create the fred user without a C## in from of the user ID.  However, this user will not used useful in a pluggable/container database:
 ```sh
 ALTER session SET "_ORACLE_SCRIPT"=true;
 CREATE USER sumo_user IDENTIFIED BY "<yourpassword>";
