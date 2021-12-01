@@ -27,7 +27,7 @@ GRANT CREATE SESSION TO sumo_user;
     If the script is not executing, adjust the file permission and the Python path.
  3. Download [exec_oracle_metrics.sh](https://raw.githubusercontent.com/SumoLogic/sumologic-integrations/main/Oracle/exec_oracle_metrics.sh) onto your Telegraf agent server.
  4. Edit the script to change the environment variables, and python execution path for your Telegraf agent server.
- 5. Change the ```<sumo_user-password>``` & ```<sid>``` parameters in exec_oracle_metrics.sh file
+ 5. Change the ```<sumo_user-password>``` & ```<sid>``` parameters in ```exec_oracle_metrics.sh``` file
     ```sh
     # Example.
     /usr/bin/python3.6 "/home/oracle/sumo_oracle_metrics.py" -u "sumo_user" -p "sumopassword123" -s "orcl"
