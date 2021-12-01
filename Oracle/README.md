@@ -43,6 +43,7 @@ Create a file called ```oracle.conf``` in ```/etc/telegraf/telegraf.d``` and ent
    data_format = "influx"
 ```
 **NOTE**: use the path of the exec_oracle_metrics.sh.
+
 **For Windows Telegraf agent server.**
 Edit the ```telegraf.conf``` file located at ```Program Files\Telegraf``` and enter the following snippet:
 ```sh
@@ -54,6 +55,7 @@ Edit the ```telegraf.conf``` file located at ```Program Files\Telegraf``` and en
    data_format = "influx"
 ```
 Change the password and sid in the code snippet.
+
 **NOTE**: use the path of the ```sumo_oracle_metrics.py```
 ### Step 6. Restart Telegraf
 **For Linux**
