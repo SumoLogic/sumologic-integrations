@@ -35,6 +35,7 @@ GRANT CREATE SESSION TO sumo_user;
  6. Note down the full paths for files downloaded and saved from steps 1 & 3 above
 ### Step 5. Configure Telegraf Exec Input Plugin
 **For Linux Telegraf agent server**
+
 Create a file called ```oracle.conf``` in ```/etc/telegraf/telegraf.d``` and enter the following snippet:
 ```sh
 [[inputs.exec]]
@@ -45,6 +46,7 @@ Create a file called ```oracle.conf``` in ```/etc/telegraf/telegraf.d``` and ent
 **NOTE**: use the path of the exec_oracle_metrics.sh.
 
 **For Windows Telegraf agent server.**
+
 Edit the ```telegraf.conf``` file located at ```Program Files\Telegraf``` and enter the following snippet:
 ```sh
 [[inputs.exec]]
@@ -59,8 +61,11 @@ Change the password and sid in the code snippet.
 **NOTE**: use the path of the ```sumo_oracle_metrics.py```
 ### Step 6. Restart Telegraf
 **For Linux**
+
 Run ```sudo service telegraf restart``` to restart your Telegraf agent.
+
 **For Windows**
+
 Restart the Telegraf service using the Windows Services Management Console or from the command prompt:
 ```sh
 net stop telegraf
