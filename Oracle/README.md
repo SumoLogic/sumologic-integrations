@@ -3,7 +3,16 @@
 If you don’t have the Telegraf agent installed, use the [following steps](https://help.sumologic.com/03Send-Data/Collect-from-Other-Data-Sources/Collect_Metrics_Using_Telegraf/03_Install_Telegraf) to install Telegraf. Otherwise, continue to step 2.
 ### Step 2. Create Sumo User in Oracle
 ```sh
-CREATE USER sumo_user IDENTIFIED BY <yourpassword>;
+CREATE USER sumo_user IDENTIFIED BY "<yourpassword>";
+GRANT select_catalog_role TO sumo_user;
+GRANT CREATE SESSION TO sumo_user;
+```
+If you get error ```ORA-65096: invalid common user or role name``` when creating sumo_user
+
+You set the undocumented (hidden) parameter "_oracle_script"=true  you can create the fred user without a C## in from of the user ID.  However, this user will not used useful in a pluggable/container database:
+```sh
+ALTER session SET "_ORACLE_SCRIPT"=true;
+CREATE USER sumo_user IDENTIFIED BY "<yourpassword>";
 GRANT select_catalog_role TO sumo_user;
 GRANT CREATE SESSION TO sumo_user;
 ```
