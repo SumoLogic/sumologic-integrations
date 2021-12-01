@@ -51,7 +51,7 @@ Edit the ```telegraf.conf``` file located at ```Program Files\Telegraf``` and en
 ```sh
 [[inputs.exec]]
    commands = [
-         'python "C:\sumo\sumo_oracle_metrics.py" -u "wavefront" -p "<password>" -s "<sid>"'
+         'python "C:\sumo\sumo_oracle_metrics.py" -u "sumo_user" -p "<password>" -s "<sid>"'
 			]
    timeout = "5s"
    data_format = "influx"
