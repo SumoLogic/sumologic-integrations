@@ -48,11 +48,27 @@ GRANT CREATE SESSION TO sumo_user;
 Create a file called ```oracle.conf``` in ```/etc/telegraf/telegraf.d``` and enter the following snippet:
 ```sh
 [[inputs.exec]]
-   commands = ["/home/oracle/exec_oracle_metrics.sh"]
+   commands = ["/<path_TO_BE_CHANGEME>/exec_oracle_metrics.sh"]
    timeout = "5s"
    data_format = "influx"
+  [inputs.exec.tags]
+    environment="<DEV_TO_BE_CHANGEME>"
+    component="database"
+    db_system="oracle"
+    db_cluster="<PROD_TO_BE_CHANGEME>"
+
+[[outputs.sumologic]]
+  url = "<URL_from_HTTP_Logs_and_Metrics_Source>"
+  data_format = "prometheus"
 ```
-**NOTE**: use the path of the exec_oracle_metrics.sh.
+Enter values for fields annotated with ```<VALUE_TO_BE_CHANGED>``` to the appropriate values. Do not include the brackets (```<>```) in your final configuration
+* Input plugins section, which is ```[[inputs.exec]]```:
+    * **commands** - The exec plugin executes all the ```commands``` in parallel on every interval and parses metrics from their output in any one of the accepted Input Data Formats.
+* In the tags section, which is ```[inputs.exec.tags]```:
+    * **environment** - This is the deployment environment where the Oracle cluster identified by the value of **servers** resides. For example: **dev**, **prod**, or **QA**. While this value is optional we highly recommend setting it. 
+    * **db_cluster** - Enter a name to identify this Oracle cluster. This cluster name will be shown in our dashboards. 
+* In the output plugins section, which is ```[[outputs.sumologic]]```: 
+    * **URL** - This is the HTTP source URL created previously. See this doc for more information on additional parameters for configuring the Sumo Logic Telegraf output plugin.
 
 **For Windows Telegraf agent server.**
 
@@ -60,14 +76,28 @@ Edit the ```telegraf.conf``` file located at ```Program Files\Telegraf``` and en
 ```sh
 [[inputs.exec]]
    commands = [
-         'python "C:\sumo\sumo_oracle_metrics.py" -u "sumo_user" -p "<password>" -s "<sid>"'
+         'python "<path_TO_BE_CHANGEME>\sumo_oracle_metrics.py" -u "sumo_user" -p "<password_TO_BE_CHANGEME>" -s "<sid_TO_BE_CHANGEME>"'
 			]
    timeout = "5s"
    data_format = "influx"
-```
-Change the password and sid in the code snippet.
+  [inputs.exec.tags]
+    environment="<DEV_TO_BE_CHANGEME>"
+    component="database"
+    db_system="oracle"
+    db_cluster="<PROD_TO_BE_CHANGEME>"
 
-**NOTE**: use the path of the ```sumo_oracle_metrics.py```
+[[outputs.sumologic]]
+  url = "<URL_from_HTTP_Logs_and_Metrics_Source>"
+  data_format = "prometheus"
+```
+Enter values for fields annotated with ```<VALUE_TO_BE_CHANGED>``` to the appropriate values. Do not include the brackets (```<>```) in your final configuration
+* Input plugins section, which is ```[[inputs.exec]]```:
+    * **commands** - The exec plugin executes all the ```commands``` in parallel on every interval and parses metrics from their output in any one of the accepted Input Data Formats.
+* In the tags section, which is ```[inputs.exec.tags]```:
+    * **environment** - This is the deployment environment where the Oracle cluster identified by the value of **servers** resides. For example: **dev**, **prod**, or **QA**. While this value is optional we highly recommend setting it. 
+    * **db_cluster** - Enter a name to identify this Oracle cluster. This cluster name will be shown in our dashboards. 
+* In the output plugins section, which is ```[[outputs.sumologic]]```: 
+    * **URL** - This is the HTTP source URL created previously. See this doc for more information on additional parameters for configuring the Sumo Logic Telegraf output plugin.
 ### Step 6. Restart Telegraf
 **For Linux**
 
